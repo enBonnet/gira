@@ -110,8 +110,9 @@ func (c *Client) GetMyTasks(project string) ([]Issue, error) {
 	}
 
 	searchReq := map[string]interface{}{
-		"jql":    jql,
-		"fields": []string{"summary", "status", "priority", "assignee"},
+		"jql":        jql,
+		"fields":     []string{"summary", "status", "priority", "assignee"},
+		"maxResults": 100,
 	}
 
 	body, err := json.Marshal(searchReq)

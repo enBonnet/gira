@@ -12,6 +12,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var taskLimit int
+
 var tasksCmd = &cobra.Command{
 	Use:   "tasks",
 	Short: "List your Jira tasks",
@@ -41,6 +43,10 @@ var tasksCmd = &cobra.Command{
 			return issues[i].Fields.Priority.ID < issues[j].Fields.Priority.ID
 		})
 
+		if taskLimit > 0 && len(issues) > taskLimit {
+			issues = issues[:taskLimit]
+		}
+
 		w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
 		fmt.Fprintln(w, "KEY\tSTATUS\tPRIORITY\tSUMMARY\tURL")
 		for _, issue := range issues {
@@ -54,5 +60,6 @@ var tasksCmd = &cobra.Command{
 }
 
 func init() {
+	tasksCmd.Flags().IntVarP(&taskLimit, "limit", "l", 5, "maximum number of tasks to display")
 	rootCmd.AddCommand(tasksCmd)
 }
