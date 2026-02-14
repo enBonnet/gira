@@ -4,14 +4,47 @@ A CLI tool to manage your Jira tasks from the terminal.
 
 ## Installation
 
+### Download Binary
+
+Download the latest binary for your platform from [Releases](https://github.com/enBonnet/gira/releases):
+
 ```bash
+# Linux/macOS - make it executable and move to PATH
+chmod +x gira
+sudo mv gira /usr/local/bin/
+
+# Windows - add to PATH
+# Move gira.exe to a folder like C:\Program Files\gira\
+# Add that folder to your PATH environment variable
+```
+
+### Go Install
+
+```bash
+go install github.com/enBonnet/gira@latest
+```
+
+The binary will be installed to `$GOPATH/bin` (or `$HOME/go/bin` by default).
+
+### Build from Source
+
+```bash
+git clone https://github.com/enBonnet/gira.git
+cd gira
 go build -o gira .
 ```
 
-Move the binary to your PATH:
+**Add to PATH:**
 
 ```bash
+# Linux/macOS
 sudo mv gira /usr/local/bin/
+
+# Or add to your local bin
+mkdir -p ~/bin
+mv gira ~/bin/
+# Add to your shell config (~/.bashrc, ~/.zshrc, etc.)
+export PATH="$HOME/bin:$PATH"
 ```
 
 ## Configuration
